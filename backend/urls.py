@@ -6,9 +6,10 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
+from rest_framework import routers, serializers, viewsets
+from backend.api.models import Sensor
 
-from .api.views import index_view, MessageViewSet, UserViewSet, GroupViewSet
+from .api.views import index_view, MessageViewSet, UserViewSet, GroupViewSet, SensorViewSet
 from backend.api import rest
 
 router = routers.DefaultRouter()
@@ -19,6 +20,10 @@ user_router.register('users', UserViewSet)
 
 group_router = routers.DefaultRouter()
 group_router.register('groups', GroupViewSet)
+
+sensor_router = routers.DefaultRouter()
+sensor_router.register('sensors', SensorViewSet)
+
 
 urlpatterns = [
 
@@ -35,6 +40,7 @@ urlpatterns = [
     # http://localhost:8000/api/admin/
     path('api/admin/', admin.site.urls),
 
+    path('api/sensor/', include(sensor_router.urls))
 
         path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
 ]

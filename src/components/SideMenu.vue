@@ -1,8 +1,8 @@
 <template>
 <div class="container-fluid side-element box-shadow-line">
   <ul>
-    <li class="#"><router-link :to="{ name: 'home' }">Главная</router-link></li>
-    <li><router-link :to="{ name: 'control_panel' }">Панель управления</router-link></li>
+    <li class="#"><router-link :to="{ name: 'control_panel' }">Панель управления</router-link></li>
+    <li><router-link :to="{ name: 'monitoring' }">Мониторинг</router-link></li>
     <li><router-link :to="{ name: 'messages' }">Территории</router-link></li>
     <li><router-link :to="{ name: 'bootstrap' }">Список датчиков</router-link></li>
   </ul>

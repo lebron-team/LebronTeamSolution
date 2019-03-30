@@ -33,6 +33,7 @@ class Area_Point(models.Model):
     points_list = models.ForeignKey(Area_Points_List, on_delete=models.CASCADE, blank=False, null=False)
     array_number = models.IntegerField(verbose_name='Порядковый номер', blank=True, null=False)
 
+
 class Region(models.Model):
     class Meta:
         verbose_name = 'Область'
@@ -42,11 +43,13 @@ class Region(models.Model):
                                     null=True)
     name = models.CharField(verbose_name='Имя области', max_length=20)
 
+
 class Sensor_Group(models.Model):
     class Meta:
         verbose_name = 'Координаты зоны ответственности группы датчиков'
         verbose_name_plural = 'Координаты зоны ответственности группы датчиков'
 
+        
     coords_list = models.ForeignKey(Area_Points_List, verbose_name='Список координат', on_delete=models.DO_NOTHING,
                                     blank=True,
                                     null=True)
@@ -62,6 +65,7 @@ class Area_Point_Serializer(ModelSerializer):
             'array_number'
         )
 
+
 class Sensor(models.Model):
     class Meta:
         verbose_name = 'Датчики'
@@ -71,10 +75,13 @@ class Sensor(models.Model):
     sensor_group = models.ForeignKey(Sensor_Group, verbose_name='Группа сенсеров', on_delete=models.DO_NOTHING, blank=True, null=True)
     status = models.BooleanField(verbose_name='Статус', default=False, blank=False)
     temp = models.IntegerField(verbose_name='Температура', blank=True, null=False)
-    wind_direction = models.IntegerField(verbose_name='Направление ветра', blank=True, null=False, validators=[MaxValueValidator(100), MinValueValidator(0)
-        ])
+    wind_direction = models.IntegerField(
+        verbose_name='Направление ветра',
+        blank=True, null=False,
+        validators=[MaxValueValidator(100), MinValueValidator(0)]
+    )
     wind_speed = models.IntegerField(verbose_name='Скорость ветра', blank=True, null=False)
-    humidity  = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
+    humidity = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
     sensor_coords_lat = models.DecimalField(verbose_name='Широта', blank=True, null=False, max_digits=10, decimal_places=6)
     sensor_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
     region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
@@ -85,6 +92,7 @@ class Sensor(models.Model):
         points = Area_Point.objects.filter(points_list=self.coords_list)
         data_points = Area_Point_Serializer(points, many=True)
         return data_points.data
+
 
 class Sensor_Data_Set(models.Model):
     class Meta:
@@ -97,6 +105,7 @@ class Sensor_Data_Set(models.Model):
     wind_direction = models.IntegerField(verbose_name='Направление ветра', blank=True, null=False)
     wind_speed = models.IntegerField(verbose_name='Скорость ветра', blank=True, null=False)
     humidity = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
+
 
 class Alarm_Status(models.Model):
     class Meta:
