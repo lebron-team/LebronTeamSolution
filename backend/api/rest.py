@@ -22,8 +22,7 @@ class Get_Data_Set_By_Region(APIView):
         group = Sensor_Group.objects.get(id)
         sensors = Sensor.objects.filter(sensor_group=group)
         group_points = Area_Point.objects.filter(points_list=group.coords_list)
-        # data_sensors =
-        pass
+
 
 
 

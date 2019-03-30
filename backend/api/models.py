@@ -84,7 +84,6 @@ class Sensor(models.Model):
     def points(self):
         points = Area_Point.objects.filter(points_list=self.coords_list)
         data_points = Area_Point_Serializer(points, many=True)
-        print(data_points.data)
         return data_points.data
 
 class Sensor_Data_Set(models.Model):
