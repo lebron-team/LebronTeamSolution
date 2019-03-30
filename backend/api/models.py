@@ -13,13 +13,52 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
         model = Message
         fields = ('url', 'subject', 'body', 'pk')
 
+class Area_Points_List(models.Model):
+    class Meta:
+        verbose_name = 'Список координат'
+        verbose_name_plural = 'Список координат'
+
+
+    def humananized_status(self):
+        pass
+
+class Area_Point(models.Model):
+    class Meta:
+        verbose_name = 'Координаты зоны ответственности датчика'
+        verbose_name_plural = 'Координаты зоны ответственности датчика'
+
+    point_coords_lat = models.DecimalField(verbose_name='Широта', blank=True, null=False, max_digits=10, decimal_places=6)
+    point_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
+    points_list = models.ForeignKey(Area_Points_List, on_delete=models.CASCADE, blank=False, null=False)
+    array_number = models.IntegerField(verbose_name='Порядковый номер', blank=True, null=False)
+
+class Region(models.Model):
+    class Meta:
+        verbose_name = 'Область'
+        verbose_name_plural = 'Область'
+
+    coords_list = models.ForeignKey(Area_Points_List, verbose_name='Список координат', on_delete=models.DO_NOTHING, blank=True,
+                                    null=True)
+    name = models.CharField(verbose_name='Имя области', max_length=20)
+
+class Sensor_Group(models.Model):
+    class Meta:
+        verbose_name = 'Координаты зоны ответственности группы датчиков'
+        verbose_name_plural = 'Координаты зоны ответственности группы датчиков'
+
+    coords_list = models.ForeignKey(Area_Points_List, verbose_name='Список координат', on_delete=models.DO_NOTHING,
+                                    blank=True,
+                                    null=True)
+    region = models.ForeignKey(Region, verbose_name='Список координат', on_delete=models.DO_NOTHING, blank=True,
+                                    null=True)
 class Sensor(models.Model):
     class Meta:
         verbose_name = 'Датчики'
         verbose_name_plural = 'Датчики'
 
+    coords_list = models.ForeignKey(Area_Points_List, verbose_name='Список координат', on_delete=models.DO_NOTHING, blank=True, null=True)
+    sensor_group = models.ForeignKey(Sensor_Group, verbose_name='Группа сенсеров', on_delete=models.DO_NOTHING, blank=True, null=True)
     status = models.BooleanField(verbose_name='Статус', default=False, blank=False)
-    area_status = models.IntegerField(verbose_name='Статус области', default=0)
     temp = models.IntegerField(verbose_name='Температура', blank=True, null=False)
     wind_direction = models.IntegerField(verbose_name='Направление ветра', blank=True, null=False, validators=[MaxValueValidator(100), MinValueValidator(0)
         ])
@@ -28,27 +67,23 @@ class Sensor(models.Model):
     sensor_coords_lat = models.DecimalField(verbose_name='Широта', blank=True, null=False, max_digits=10, decimal_places=6)
     sensor_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
 
-    def humananized_status(self):
-        pass
-
-
 class Sensor_Data_Set(models.Model):
     class Meta:
         verbose_name = 'Список показателей датчиков'
         verbose_name_plural = 'Список показателей датчиков'
 
     date_time = models.DateTimeField(default=datetime.now(), blank=True)
-    sensor = models.ForeignKey(Sensor,on_delete=models.DO_NOTHING, blank=False, null=False)
+    sensor = models.ForeignKey(Sensor, on_delete=models.DO_NOTHING, blank=False, null=False)
     temp = models.IntegerField(verbose_name='Температура', blank=True, null=False)
     wind_direction = models.IntegerField(verbose_name='Направление ветра', blank=True, null=False)
     wind_speed = models.IntegerField(verbose_name='Скорость ветра', blank=True, null=False)
     humidity = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
 
-class Sensor_Area_Point(models.Model):
+class Alarm_Status(models.Model):
     class Meta:
-        verbose_name = 'Координаты зоны ответственности'
-        verbose_name_plural = 'Координаты зоны ответственности'
+        verbose_name = 'Тревожный статус'
+        verbose_name_plural = 'Тревожный статус'
 
-    point_coords_lat = models.DecimalField(verbose_name='Широта', blank=True, null=False, max_digits=10, decimal_places=6)
-    point_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
-    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, blank=False, null=False)
+    name = models.CharField(verbose_name='Имя статуса', max_length=10)
+    status_text = models.CharField(verbose_name='Текст статуса', max_length=30)
+

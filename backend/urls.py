@@ -9,7 +9,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from .api.views import index_view, MessageViewSet, UserViewSet, GroupViewSet
-
+from backend.api import rest
 
 router = routers.DefaultRouter()
 router.register('messages', MessageViewSet)
@@ -34,6 +34,9 @@ urlpatterns = [
 
     # http://localhost:8000/api/admin/
     path('api/admin/', admin.site.urls),
+
+
+
 ]
 
 
