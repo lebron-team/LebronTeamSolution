@@ -42,7 +42,8 @@ urlpatterns = [
 
     path('api/sensor/', include(sensor_router.urls))
 
-
+        path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
 ]
+
 
 
