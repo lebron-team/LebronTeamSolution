@@ -2,6 +2,7 @@ from django.db import models
 from rest_framework import serializers
 from datetime import datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
+from rest_framework.serializers import ModelSerializer
 
 class Message(models.Model):
     subject = models.CharField(max_length=200)
@@ -24,8 +25,8 @@ class Area_Points_List(models.Model):
 
 class Area_Point(models.Model):
     class Meta:
-        verbose_name = 'Координаты зоны ответственности датчика'
-        verbose_name_plural = 'Координаты зоны ответственности датчика'
+        verbose_name = 'Координатa'
+        verbose_name_plural = 'Координатa'
 
     point_coords_lat = models.DecimalField(verbose_name='Широта', blank=True, null=False, max_digits=10, decimal_places=6)
     point_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
@@ -49,7 +50,7 @@ class Sensor_Group(models.Model):
     coords_list = models.ForeignKey(Area_Points_List, verbose_name='Список координат', on_delete=models.DO_NOTHING,
                                     blank=True,
                                     null=True)
-    region = models.ForeignKey(Region, verbose_name='Список координат', on_delete=models.DO_NOTHING, blank=True,
+    region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
                                     null=True)
 class Sensor(models.Model):
     class Meta:
@@ -66,6 +67,8 @@ class Sensor(models.Model):
     humidity  = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
     sensor_coords_lat = models.DecimalField(verbose_name='Широта', blank=True, null=False, max_digits=10, decimal_places=6)
     sensor_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
+    region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
+                               null=True)
 
 class Sensor_Data_Set(models.Model):
     class Meta:
@@ -87,3 +90,13 @@ class Alarm_Status(models.Model):
     name = models.CharField(verbose_name='Имя статуса', max_length=10)
     status_text = models.CharField(verbose_name='Текст статуса', max_length=30)
 
+class SensorSerializer(ModelSerializer):
+    class Meta:
+        model = Sensor
+        fields = (
+            'status',
+            'temp',
+            'wind_direction',
+            'wind_speed',
+            'humidity',
+        )

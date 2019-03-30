@@ -36,7 +36,8 @@ urlpatterns = [
     path('api/admin/', admin.site.urls),
 
 
-
+    path('api/rest/<int:pk>/', rest.Get_Sensor.as_view()),
 ]
+
 
 
