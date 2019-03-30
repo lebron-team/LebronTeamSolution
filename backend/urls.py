@@ -9,7 +9,7 @@ from django.urls import path, include
 from rest_framework import routers, serializers, viewsets
 from backend.api.models import Sensor
 
-from .api.views import index_view, MessageViewSet, UserViewSet, GroupViewSet, SensorViewSet
+from .api.views import index_view, MessageViewSet, UserViewSet, GroupViewSet, SensorViewSet, SensorDataSetViewSet
 from backend.api import rest
 
 router = routers.DefaultRouter()
@@ -24,6 +24,8 @@ group_router.register('groups', GroupViewSet)
 sensor_router = routers.DefaultRouter()
 sensor_router.register('sensors', SensorViewSet)
 
+sensors_data_set_routers = routers.DefaultRouter()
+sensors_data_set_routers.register('sets', SensorDataSetViewSet)
 
 urlpatterns = [
 
@@ -35,14 +37,16 @@ urlpatterns = [
 
     path('api-out/', include(user_router.urls)),
 
-    path('api-out/', include(group_router.urls)),
+    path('api-group/', include(group_router.urls)),
 
     # http://localhost:8000/api/admin/
     path('api/admin/', admin.site.urls),
 
-    path('api/sensor/', include(sensor_router.urls))
+    path('api/sensors/', include(sensor_router.urls)),
 
-        path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
+    path('api/sensor-data-set', include(sensors_data_set_routers.urls)),
+
+    path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
 ]
 
 
