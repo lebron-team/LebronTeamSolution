@@ -4,7 +4,8 @@
     <div id="nav">
      <router-link :to="{ name: 'home' }">Vue</router-link> |
      <router-link :to="{ name: 'messages' }">Django Rest</router-link> |
-     <router-link :to="{ name: 'control_panel' }">Control Panel</router-link>
+     <router-link :to="{ name: 'bootstrap' }">Bootstrap</router-link> |
+        <router-link :to="{ name: 'control_panel' }">Control Panel</router-link>
     </div>
     <router-view/>
   </div>
