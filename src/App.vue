@@ -1,12 +1,5 @@
 <template>
   <div id="app">
-    <h1>Django VueJs Template</h1>
-    <div id="nav">
-     <router-link :to="{ name: 'home' }">Vue</router-link> |
-     <router-link :to="{ name: 'messages' }">Django Rest</router-link> |
-     <router-link :to="{ name: 'bootstrap' }">Bootstrap</router-link> |
-        <router-link :to="{ name: 'control_panel' }">Control Panel</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
@@ -18,6 +11,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
