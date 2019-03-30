@@ -14,6 +14,7 @@ class Get_Sensor(APIView):
 class Get_Data_Set_By_Sensor_Group(APIView):
     def get(self, request, id):
         sensor_group = Sensor_Group.objects.get(id=id)
+        sensor_list = Sensor.objects.filter(sensor_group=sensor_group.id)
         return Response()
 
 class Get_Data_Set_By_Region(APIView):
