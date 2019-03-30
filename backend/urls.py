@@ -36,8 +36,6 @@ urlpatterns = [
     path('api/admin/', admin.site.urls),
 
 
-    path('api/rest/<int:pk>/', rest.Area_Load.as_view(), name='area_load'),
-
 
 ]
 
