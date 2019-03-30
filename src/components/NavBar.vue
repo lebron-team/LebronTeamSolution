@@ -7,16 +7,16 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link text-light" href="#">Система уравления <span class="sr-only">(current)</span></a>
+        <router-link class="nav-link text-light" :to="{ name: 'control_panel' }">Панель управления</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Лесничие</a>
+        <router-link class="nav-link text-light" :to="{ name: 'forester' }">Лесничие</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Экстренная связь</a>
+        <router-link class="nav-link text-light" :to="{ name: 'emergency' }">Экстренная связь</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Обновление</a>
+        <router-link class="nav-link text-light" :to="{ name: 'update' }">Обновления</router-link>
       </li>
     </ul>
     <form class="form-inline text-span">
