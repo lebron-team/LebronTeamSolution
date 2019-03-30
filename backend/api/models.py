@@ -52,6 +52,16 @@ class Sensor_Group(models.Model):
                                     null=True)
     region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
                                     null=True)
+
+class Area_Point_Serializer(ModelSerializer):
+    class Meta:
+        model = Area_Point
+        fields = (
+            'point_coords_lat',
+            'point_coords_lng',
+            'array_number'
+        )
+
 class Sensor(models.Model):
     class Meta:
         verbose_name = 'Датчики'
@@ -69,6 +79,13 @@ class Sensor(models.Model):
     sensor_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
     region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
                                null=True)
+
+    @property
+    def points(self):
+        points = Area_Point.objects.filter(points_list=self.coords_list)
+        data_points = Area_Point_Serializer(points, many=True)
+        print(data_points.data)
+        return data_points.data
 
 class Sensor_Data_Set(models.Model):
     class Meta:
@@ -91,6 +108,8 @@ class Alarm_Status(models.Model):
     status_text = models.CharField(verbose_name='Текст статуса', max_length=30)
 
 class SensorSerializer(ModelSerializer):
+    points = serializers.ReadOnlyField()
+
     class Meta:
         model = Sensor
         fields = (
@@ -100,14 +119,6 @@ class SensorSerializer(ModelSerializer):
             'wind_speed',
             'humidity',
             'sensor_coords_lat',
-            'sensor_coords_lng'
-        )
-
-class Area_Point_Serializer(ModelSerializer):
-    class Meta:
-        model = Area_Point
-        fields = (
-            'point_coords_lat',
-            'point_coords_lng',
-            'array_number'
+            'sensor_coords_lng',
+            'points'
         )

@@ -6,13 +6,9 @@ from django.shortcuts import get_object_or_404
 
 class Get_Sensor(APIView):
     def get(self, requst, id):
-
         sensor = Sensor.objects.get(id=id)
-        points = Area_Point.objects.filter(points_list=sensor.coords_list)
-
         data_sensor = SensorSerializer(sensor)
-        data_points = Area_Point_Serializer(points, many=True)
-        return Response({'sensor': data_sensor.data, 'points': data_points.data})
+        return Response({'sensor': data_sensor.data})
 
 class Get_Data_Set_By_Sensor_Group(APIView):
     def get(self, request, id):
@@ -22,7 +18,12 @@ class Get_Data_Set_By_Sensor_Group(APIView):
         return JsonResponse({'sensor_list': sensor_list, 'coords_list': coords_list})
 
 class Get_Data_Set_By_Region(APIView):
-    def get(self, requset):
+    def get(self, requset, id):
+        group = Sensor_Group.objects.get(id)
+        sensors = Sensor.objects.filter(sensor_group=group)
+        group_points = Area_Point.objects.filter(points_list=group.coords_list)
+        # data_sensors =
         pass
+
 
 
