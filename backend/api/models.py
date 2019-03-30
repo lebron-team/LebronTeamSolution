@@ -99,4 +99,15 @@ class SensorSerializer(ModelSerializer):
             'wind_direction',
             'wind_speed',
             'humidity',
+            'sensor_coords_lat',
+            'sensor_coords_lng'
+        )
+
+class Area_Point_Serializer(ModelSerializer):
+    class Meta:
+        model = Area_Point
+        fields = (
+            'point_coords_lat',
+            'point_coords_lng',
+            'array_number'
         )
