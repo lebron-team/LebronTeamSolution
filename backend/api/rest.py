@@ -1,8 +1,9 @@
 from django.http import HttpResponseNotFound, HttpResponse, HttpResponseForbidden, JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView, View
-from backend.api.models import Area_Point, Sensor, Sensor_Group, Region, Sensor_Data_Set, SensorSerializer, Area_Point_Serializer, GroupSerializer, RegionSerializer, GroupsSerializer, RegionsSerialize
+from backend.api.models import Area_Point, Sensor, Sensor_Group, Region, Sensor_Data_Set, SensorSerializer, Area_Point_Serializer, GroupSerializer, RegionSerializer, GroupsSerializer, RegionsSerialize, DataSetsSerializer
 from django.shortcuts import get_object_or_404
+from backend.api import funcs
 
 class Get_Sensor(APIView):
     def get(self, requst, id):
@@ -37,11 +38,27 @@ class Get_Data_Set_By_Sensor_Group(APIView):
         return  Response({'group': data_group.data})
 
 class Get_Data_Set(APIView):
-    def get(self, requset, id, time):
-        if time == 0:
-            data_set = Sensor_Data_Set.objects.get(id=id)
-            pass
-        pass
+    def get(self, requset, id, time, time_to):
+        if time == 0 and time_to == 0 and id != 0:
+            sensor = Sensor.objects.get(id=id)
+            data_set = Sensor_Data_Set.objects.filter(sensor=sensor)
+            data_data_set = DataSetsSerializer(data_set, many=True)
+            return Response({'data_sets': data_data_set.data})
+        if id == 0 and time == 0 and time_to == 0:
+            print('Всё ноль')
+            data_set = Sensor_Data_Set.objects.all()
+            data_data_set = DataSetsSerializer(data_set, many=True)
+            return Response({'data_sets': data_data_set.data})
+        # dj_time = funcs.unix_to_time(time)
+        # dj_time_to = funcs.unix_to_time(time_to)
+        sensor = Sensor.objects.get(id=id)
+        data_set = Sensor_Data_Set.objects.filter(sensor=sensor)
+        data_set_out = []
+        for x in data_set:
+            if x.unix_date <= time_to and x.unix_date >= time:
+                data_set_out.append(x)
+        data_data_set = DataSetsSerializer(data_set_out, many=True)
+        return Response({'data_set': data_data_set.data})
 
 class Get_All_Groups(APIView):
     def get(self, request):
