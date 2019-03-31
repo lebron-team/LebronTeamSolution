@@ -223,3 +223,10 @@ class DataSetsSerializer(ModelSerializer):
             'humidity',
             'sensor'
         )
+
+class SensorsSerializer(ModelSerializer):
+    class Meta:
+        model = Sensor
+        fields = (
+            'id',
+        )
