@@ -6,25 +6,30 @@ from django.shortcuts import get_object_or_404
 
 class Get_Sensor(APIView):
     def get(self, requst, id):
+        if id == 0:
+            sensor = Sensor.objects.all()
+            data_sensor = SensorSerializer(sensor, many=True)
+            return Response(data_sensor.data)
         sensor = Sensor.objects.get(id=id)
         data_sensor = SensorSerializer(sensor)
         return Response({'sensor': data_sensor.data})
 
-class Get_Data_Set_By_Sensor_Group(APIView):
-    def get(self, request, id):
-        sensor_group = Sensor_Group.objects.get(id=id)
-        sensor_list = Sensor.objects.filter(sensor_group=sensor_group.id)
-        coords_list = Area_Point.objects.filter(points_list=sensor_group.coords_list)
-        return JsonResponse({'sensor_list': sensor_list, 'coords_list': coords_list})
-
 class Get_Data_Set_By_Region(APIView):
     def get(self, requset, id):
+        if id == 0:
+            pass
+        pass
+
+
+class Get_Data_Set_By_Sensor_Group(APIView):
+    def get(self, requset, id):
+        if id == 0:
+            groups = Sensor_Group.objects.all()
+            data_group = GroupSerializer(groups, many=True)
+            return Response({'groups': data_group.data})
+
         group = Sensor_Group.objects.get(id=id)
-        print(Area_Point.objects.filter(points_list=group.coords_list))
-        sensors = Sensor.objects.filter(sensor_group=group)
-        data_sensors = SensorSerializer(sensors, many=True)
         data_group = GroupSerializer(group)
-        print(data_group.data)
-        return  Response({'group_points': data_group.data, 'sensors': data_sensors.data})
+        return  Response({'group': data_group.data})
 
 
