@@ -6,20 +6,25 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-2">
+      <div class="col-2 ml-3">
         <side-menu></side-menu>
       </div>
 
-      <div class="col-10 main-window-element box-shadow-line">
-        <h4>Система мониторинга лесного массива Российской Федерации</h4>
-          <div class="row-8">
-            <span class="text-muted">Доступны обновления с датчиков: 24 </span>
-            <span class="text-muted">Последний запуск мониторинга: 1 час назад</span>
-          </div>
+      <div class="col-9 main-window-element box-shadow-line">
+        <div class="container-fluid"><br />
+          <h4>Система мониторинга лесного массива Российской Федерации</h4>
+            <div class="row-8">
+              <span class="text-muted">Доступны обновления с датчиков: 24 </span>
+              <span class="text-muted">Последний запуск мониторинга: 1 час назад</span>
+            </div><br />
+        </div>
 
         <russian-map></russian-map>
 
       </div>
+    </div>
+    <div class="row">
+      <f></f>
     </div>
   </div>
 
@@ -31,6 +36,7 @@
   import SideMenu from "@/components/SideMenu"
   import RussianMap from '@/components/RussianMap'
   import NavBar from '@/components/NavBar'
+  import F from '@/components/F'
 
   export default {
     name: "ControlPanel",
@@ -38,7 +44,8 @@
       'test': Test,
       'side-menu': SideMenu,
       'russian-map': RussianMap,
-      'nav-bar': NavBar
+      'nav-bar': NavBar,
+      'f': F
     }
   }
 </script>
@@ -66,8 +73,8 @@
   }
 
   .main-window-element {
-    margin: 1rem 0 1rem 0;
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    margin: 1rem 0 1rem 1rem;
+    padding: 1rem;
     border-radius: 0.3rem;
   }
 

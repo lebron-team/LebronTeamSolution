@@ -3,8 +3,8 @@
   <ul>
     <li class="#"><router-link :to="{ name: 'control_panel' }">Панель управления</router-link></li>
     <li><router-link :to="{ name: 'monitoring' }">Мониторинг</router-link></li>
-    <li><router-link :to="{ name: 'messages' }">Территории</router-link></li>
-    <li><router-link :to="{ name: 'bootstrap' }">Список датчиков</router-link></li>
+    <li><router-link :to="{ name: 'territories' }">Области и регионы</router-link></li>
+    <li><router-link :to="{ name: 'sensors-list' }">Список датчиков</router-link></li>
   </ul>
 </div>
 </template>
@@ -17,7 +17,7 @@
 
 <style scoped>
   .side-element {
-    margin: 1rem 0 1rem 0;
+    margin: 1rem auto;
     border-radius: 0.3rem;
     padding: 0.5rem;
     background: white;
