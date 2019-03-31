@@ -1,5 +1,18 @@
 import EventEmitter from '@/raphael/EventEmitter.js';
-import { createPath } from '@/raphael/util.js';
+const Raphael = require("./raphael");
+
+function createPath(points) {
+
+  const start = points[0];
+  let path = `M${start.x} ${start.y} L`;
+  for (let point of points) {
+      path += ` ${point.x} ${point.y}`;
+  }
+  path += ` ${start.x} ${start.y}`
+
+  return path;
+}
+
 
 const markerStyles = {
   initial: {

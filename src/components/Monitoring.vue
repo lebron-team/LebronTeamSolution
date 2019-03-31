@@ -24,6 +24,7 @@
   import SideMenu from "@/components/SideMenu"
   import NavBar from '@/components/NavBar'
   import F from '@/components/F'
+  import createMap from '@/raphael/index.js'
 
   export default {
     name: "ControlPanel",
@@ -31,10 +32,13 @@
       'side-menu': SideMenu,
       'nav-bar': NavBar,
       'f': F
-    }
+    },
+    mounted: createMap
   }
 </script>
 
 <style scoped>
-
+  #paper {
+    /* background: url('assets/back.png'); */
+  }
 </style>

@@ -1,4 +1,4 @@
-class EventEmitter {
+export default class EventEmitter {
 
   constructor() {
     this.handlers = {};
@@ -11,10 +11,6 @@ class EventEmitter {
       } else {
           this.handlers[eventName] = [ handler ];
       }
-  };
-
-  off(eventName, handler) {
-      //..
   };
 
   emit(eventName, args) {

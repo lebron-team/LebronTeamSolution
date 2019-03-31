@@ -1,6 +1,8 @@
 import config from '@/raphael/config.js';
 import Intermap from '@/raphael/Intermap.js';
 
+//Raphael.min.js
+
 const A = { x: 20, y: 40 };
 const B = { x: 80, y: 20 };
 const C = { x: 130, y: 100 };
@@ -16,7 +18,11 @@ const M2 = { x: 230, y: 100 };
 const M3 = { x: 170, y: 140 };
 const M4 = { x: 90, y: 140 }; 
 
-const map = new Intermap(config, [
+export default function(){  
+
+  debugger;
+
+  return new Intermap(config, [
     {
       data: {
         id: 0,
@@ -60,3 +66,4 @@ const map = new Intermap(config, [
       areaPoints: [ D, C, E ]
     }
 ]);
+}

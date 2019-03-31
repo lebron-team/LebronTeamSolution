@@ -1,11 +1,34 @@
-import Raphael from '@/raphael/raphael.min.js';
-import { composeStyles } from '@/raphael/util.js';
+// import Raphael from '@/raphael/raphael.min.js';
 import Region from '@/raphael/Region.js';
 import EventEmitter from '@/raphael/EventEmitter.js';
+
+function composeStyles(config) {
+
+    function _compose(state, signal) {
+          
+      const shared1 = config.shared;
+      const shared2 = config.states[state].shared;
+      const main = config.states[state][signal];
+    
+      const result = Object.assign({}, shared1, shared2, main)
+      return result;
+    }
+  
+    const styles = {};
+    for (let state in config.states) {
+      styles[state] = {}
+      for (let signal of config.signals) {
+        styles[state][signal] = _compose(state, signal);
+      }
+    }
+    return styles;
+  }
 
 export default class Intermap extends EventEmitter {
 
   constructor(config, regions) {
+      debugger;
+      super();
       this.raphael = Raphael(config.container);
       this.styles = composeStyles(config);
 
@@ -22,7 +45,7 @@ export default class Intermap extends EventEmitter {
 
               console.log('deactivate ' + sender.id);
               this.resetSelection();
-              this.emit('reset', id);
+              this.emit('reset', sender.id);
           });
       });
   }
