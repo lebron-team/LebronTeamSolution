@@ -49,6 +49,22 @@ class Region(models.Model):
     coords_list = models.ForeignKey(Area_Points_List, verbose_name='Список координат', on_delete=models.DO_NOTHING, blank=True,
                                     null=True)
     name = models.CharField(verbose_name='Имя области', max_length=20)
+    status_fk = models.ForeignKey(Alarm_Status, verbose_name='Тревожный статус', on_delete=models.DO_NOTHING, blank=True,
+                                    null=True)
+
+    @property
+    def status(self):
+        status = self.status_fk
+        return StatusSerializer(status).data
+    @property
+    def points(self):
+        points = Area_Point.objects.filter(points_list=self.coords_list)
+        data_points = Area_Point_Serializer(points, many=True)
+        return data_points.data
+    @property
+    def groups(self):
+        sensors = Sensor_Group.objects.filter(region=self.id)
+        return SensorSerializer(sensors, many=True).data
 
 class Sensor_Group(models.Model):
     class Meta:
@@ -75,7 +91,6 @@ class Sensor_Group(models.Model):
     @property
     def sensors(self):
         sensors = Sensor.objects.filter(sensor_group=self.id)
-        print(sensors)
         return SensorSerializer(sensors, many=True).data
 
 class Area_Point_Serializer(ModelSerializer):
@@ -159,4 +174,16 @@ class StatusSerializer(ModelSerializer):
         fields = (
             'name',
             'status_text'
+        )
+class RegionSerializer(ModelSerializer):
+    groups = serializers.ReadOnlyField()
+    status = serializers.ReadOnlyField()
+    points = serializers.ReadOnlyField()
+    class Meta:
+        model = Region
+        fields = (
+            'groups',
+            'status',
+            'points',
+            'name'
         )

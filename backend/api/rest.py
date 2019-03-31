@@ -15,10 +15,11 @@ class Get_Sensor(APIView):
         return Response({'sensor': data_sensor.data})
 
 class Get_Data_Set_By_Region(APIView):
-    def get(self):
+    def get(self, requset, id):
         if id == 0:
             pass
         pass
+
 
 class Get_Data_Set_By_Sensor_Group(APIView):
     def get(self, requset, id):
