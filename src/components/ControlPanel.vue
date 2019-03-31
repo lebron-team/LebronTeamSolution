@@ -40,6 +40,12 @@
 
   export default {
     name: "ControlPanel",
+      props: ['sensor_id'],
+      data () {
+        return {
+          sensor_id: {},
+        }
+      },
     components: {
       'test': Test,
       'side-menu': SideMenu,

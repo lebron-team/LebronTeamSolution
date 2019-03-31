@@ -1,10 +1,10 @@
 <template>
 <div class="container-fluid side-element box-shadow-line">
   <ul>
-    <li class="#"><router-link :to="{ name: 'control_panel' }">Панель управления</router-link></li>
     <li><router-link :to="{ name: 'monitoring' }">Мониторинг</router-link></li>
     <li><router-link :to="{ name: 'territories' }">Области и регионы</router-link></li>
     <li><router-link :to="{ name: 'sensors-list' }">Список датчиков</router-link></li>
+    <li><router-link :to="{ name: 'forester' }">Лесничие</router-link></li>
   </ul>
 </div>
 </template>

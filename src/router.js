@@ -19,7 +19,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: VueDemo
+      component: ControlPanel
     },
     {
       path: '/messages',
@@ -30,11 +30,6 @@ export default new Router({
       path: '/bootstrap',
       name: 'bootstrap',
       component: Bootstrap
-    },
-    {
-      path: '/panel',
-      name: 'control_panel',
-      component: ControlPanel
     },
     {
       path: '/forester',
