@@ -4,23 +4,26 @@
   <nav-bar></nav-bar>
 
   <div class="container-fluid">
+    <div class="page-container">
     <div class="row">
 
       <div class="col-2 ml-3">
         <side-menu></side-menu>
       </div>
 
-      <div class="col-9 main-window-element box-shadow-line">
-        <div class="container-fluid"><br />
-          <h4>Система мониторинга лесного массива Российской Федерации</h4>
-            <div class="row-8">
-              <span class="text-muted">Доступны обновления с датчиков: 24 </span>
-              <span class="text-muted">Последний запуск мониторинга: 1 час назад</span>
-            </div><br />
+        <div class="col-9 main-window-element box-shadow-line">
+          <div class="container-fluid"><br />
+            <h4>Система мониторинга лесного массива Российской Федерации</h4>
+              <div class="row-8">
+                <span class="text-muted">Доступны обновления с датчиков: 24 </span>
+                <span class="text-muted">Последний запуск мониторинга: 1 час назад</span>
+              </div><br />
+          </div>
+
+          <russian-map></russian-map>
+
+
         </div>
-
-        <russian-map></russian-map>
-
       </div>
     </div>
     <div class="row">
@@ -69,6 +72,10 @@
   .bg-light-gray {
     background: #f8f9fa;
   }
+  .page-container {
+    position: relative;
+    min-height: 100%;
+  }
   .blue-gradient {
     background: #007bff;
     background: linear-gradient(to right, #0062E6, #33AEFF);
@@ -83,5 +90,16 @@
     padding: 1rem;
     border-radius: 0.3rem;
   }
+  #layer1, #layer2 {
+    position: relative;
+   }
+
+  #layer2 {
+    top: 50%;
+   }
+   #layer1 { z-index: 2; }
+   #layer2 { z-index: 1; }
+
+
 
 </style>

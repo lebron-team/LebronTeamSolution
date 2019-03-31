@@ -3,6 +3,7 @@
     <nav-bar></nav-bar>
 
   <div class="container-fluid">
+    <div class="page-container">
     <div class="row">
 
       <div class="col-2 ml-3">
@@ -13,6 +14,7 @@
         <h4>Mониторинг ситуации на территории</h4><br />
       </div>
 
+    </div>
     </div>
   </div>
   <f></f>
