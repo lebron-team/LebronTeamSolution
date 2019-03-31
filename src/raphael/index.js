@@ -1,8 +1,6 @@
 import config from '@/raphael/config.js';
 import Intermap from '@/raphael/Intermap.js';
 
-//Raphael.min.js
-
 const A = { x: 20, y: 40 };
 const B = { x: 80, y: 20 };
 const C = { x: 130, y: 100 };

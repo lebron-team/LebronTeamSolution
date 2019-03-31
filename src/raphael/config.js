@@ -1,6 +1,4 @@
 // initials
-const BORDER_NORMAL = 'gray';
-const BORDER_INACTIVE = 'lightgray';
 
 export default {
 
@@ -18,7 +16,7 @@ export default {
     initial: {
       
       shared: {
-          stroke: BORDER_NORMAL,
+          stroke: 'gray',
           transform: 's1.0'
       },
       normal: {
@@ -70,7 +68,7 @@ export default {
         shared: {
             'fill-opacity': 0.1,
             transform: 's1.0',
-            stroke: BORDER_NORMAL
+            stroke: 'gray'
         }
     }
   }

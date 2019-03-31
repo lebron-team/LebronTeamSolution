@@ -1,22 +1,24 @@
 import EventEmitter from '@/raphael/EventEmitter.js';
-const Raphael = require("./raphael");
+const Raphael = require("./raphael.min.js");
+
+const scaleX = 2.1;
+const scaleY = 1.6;
 
 function createPath(points) {
 
   const start = points[0];
-  let path = `M${start.x} ${start.y} L`;
+  let path = `M${start.x * scaleX} ${start.y * scaleY} L`;
   for (let point of points) {
-      path += ` ${point.x} ${point.y}`;
+      path += ` ${point.x * scaleX} ${point.y * scaleY}`;
   }
-  path += ` ${start.x} ${start.y}`
-
+  path += ` ${start.x * scaleX} ${start.y * scaleY}`
   return path;
 }
 
 
 const markerStyles = {
   initial: {
-    fill: '45-#F9F9F9-#B8B8B8',
+    fill: 'lightgray',
     opacity: 1,
     'stroke-opacity': 1,
     transform: 't 0 -25'
@@ -50,7 +52,7 @@ constructor(map, points, marker, data) {
 updateStyle() {
   const styles = this.map.getStyle(this.status, this.signal);
   this.path.attr(styles);
-  
+
   let markerStyle = Object.assign({}, markerStyles[this.status]);
 
   if (this.isActive) {
@@ -77,8 +79,6 @@ setStatus(status) {
   this.updateStyle();
 }
 
-
-
 init(points, marker) {
 
   const _this = this;
@@ -87,9 +87,9 @@ init(points, marker) {
   
 
   this.markerElements = {
-    p: this.map.raphael.path(`M ${marker.x - 10} ${marker.y} L ${marker.x + 10} ${marker.y} ${marker.x} ${marker.y + 25} ${marker.x - 10} ${marker.y}`).toFront(),
-    c1: this.map.raphael.circle(marker.x, marker.y, 10).toFront(),
-    c2: this.map.raphael.circle(marker.x, marker.y, 5).toFront()
+    p: this.map.raphael.path(`M ${marker.x * scaleX - 10} ${marker.y * scaleY} L ${marker.x * scaleX + 10} ${marker.y* scaleY} ${marker.x * scaleX} ${marker.y * scaleY + 25} ${marker.x * scaleX - 10} ${marker.y * scaleY}`).toFront(),
+    c1: this.map.raphael.circle(marker.x * scaleX, marker.y * scaleY, 10).toFront(),
+    c2: this.map.raphael.circle(marker.x * scaleX, marker.y * scaleY, 5).toFront()
   }
 
   this.marker = this.map.raphael.set(

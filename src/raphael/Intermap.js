@@ -29,8 +29,9 @@ export default class Intermap extends EventEmitter {
   constructor(config, regions) {
 
       super();
-      this.raphael = Raphael(config.container);
+      this.raphael = Raphael(config.container, '100%', '100%');
       this.styles = composeStyles(config);
+      this.raphael.setViewBox(0, 0, 600, 400, true);
 
       this._signals = config.signals;
 

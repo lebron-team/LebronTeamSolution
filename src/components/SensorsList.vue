@@ -11,7 +11,7 @@
         </div>
         <div class="col-9 main-window-element box-shadow-line"><br />
             <h4>Список датчиков</h4><br />
-            <div v-for="sensor in sensors_data" class="alert alert-primary">
+            <!-- <div v-for="sensor in sensors_data" class="alert alert-primary">
                 <h4>Датчик {{sensor.name}}</h4>
                 <p>Температура: <b>{{sensor.temp}}</b> Направление ветра в градусах: <b>{{sensor.wind_direction}}</b>
                     Скорость ветра: <b>{{sensor.wind_speed}}</b> | Влажность: <b>{{sensor.humidity}}</b>
@@ -21,7 +21,7 @@
                     <div class="btn btn-info ml-2" href="#">Сообщить в МЧС</div>
                     <div class="btn btn-primary ml-2" href="#">Связаться с лесничим</div>
                     <div class="btn btn-light ml-2" href="#">Запросить данные снова</div>
-            </div>
+            </div> -->
         </div>
 
       </div>
@@ -36,7 +36,6 @@
     import NavBar from '@/components/NavBar'
     import F from '@/components/F'
     import axios from 'axios'
-    import jQuery from 'jquery'
 
     export default {
         name: "SensorsList",
