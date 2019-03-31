@@ -11,6 +11,7 @@
 
       <div class="col-9 main-window-element box-shadow-line"><br />
         <h4>Mониторинг ситуации на территории</h4><br />
+        <div id="paper"></div>
       </div>
 
     </div>
