@@ -27,7 +27,7 @@ function composeStyles(config) {
 export default class Intermap extends EventEmitter {
 
   constructor(config, regions) {
-      debugger;
+
       super();
       this.raphael = Raphael(config.container);
       this.styles = composeStyles(config);
@@ -39,7 +39,7 @@ export default class Intermap extends EventEmitter {
           s.on('activate', sender => {
               console.log('activate ' + sender.id);
               this.selectSegment(sender.id);
-              this.emit('select', id);
+              this.emit('select', sender.id);
           });
           s.on('reset', sender => {
 

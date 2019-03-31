@@ -18,9 +18,7 @@ const M2 = { x: 230, y: 100 };
 const M3 = { x: 170, y: 140 };
 const M4 = { x: 90, y: 140 }; 
 
-export default function(){  
-
-  debugger;
+export default function(){
 
   return new Intermap(config, [
     {

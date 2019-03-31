@@ -54,7 +54,7 @@ updateStyle() {
   let markerStyle = Object.assign({}, markerStyles[this.status]);
 
   if (this.isActive) {
-    // debugger;
+
     markerStyle = Object.assign(markerStyle, { fill: styles.fill })
   }
   this.markerElements.p.attr(markerStyle);

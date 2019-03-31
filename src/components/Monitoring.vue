@@ -11,7 +11,9 @@
 
       <div class="col-9 main-window-element box-shadow-line"><br />
         <h4>Mониторинг ситуации на территории</h4><br />
-        <div id="paper"></div>
+        <div class="map-container">
+          <div id="paper"></div>
+        </div>
       </div>
 
     </div>
@@ -38,7 +40,14 @@
 </script>
 
 <style scoped>
+  .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   #paper {
-    /* background: url('assets/back.png'); */
+    width: 90%;
+    height: 50vh;
+    background: url('./../assets/back.png') no-repeat center;
   }
 </style>
