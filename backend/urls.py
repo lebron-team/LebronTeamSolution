@@ -47,6 +47,7 @@ urlpatterns = [
     path('api/rest/region/<int:id>/', rest.Get_Data_Set_By_Region.as_view()),
     path('api/rest/groups/', rest.Get_All_Groups.as_view()),
     path('api/rest/regions/', rest.Get_All_Regions.as_view()),
+    path('api/rest/sensors/', rest.Get_All_Sensors.as_view()),
     path('api/rest/data_set/<int:id>/<int:time>/<int:time_to>/', rest.Get_Data_Set.as_view()),
 ]
 

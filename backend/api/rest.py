@@ -1,7 +1,7 @@
 from django.http import HttpResponseNotFound, HttpResponse, HttpResponseForbidden, JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView, View
-from backend.api.models import Area_Point, Sensor, Sensor_Group, Region, Sensor_Data_Set, SensorSerializer, Area_Point_Serializer, GroupSerializer, RegionSerializer, GroupsSerializer, RegionsSerialize, DataSetsSerializer
+from backend.api.models import Area_Point, Sensor, Sensor_Group, Region, Sensor_Data_Set, SensorSerializer, Area_Point_Serializer, GroupSerializer, RegionSerializer, GroupsSerializer, RegionsSerialize, DataSetsSerializer, SensorsSerializer
 from django.shortcuts import get_object_or_404
 from backend.api import funcs
 
@@ -70,3 +70,7 @@ class Get_All_Regions(APIView):
         regions = Region.objects.all()
         return Response({'regions': RegionsSerialize(regions, many=True).data})
 
+class Get_All_Sensors(APIView):
+    def get(self, request):
+        sensors = Sensor.objects.all()
+        return Response({'sensors': SensorsSerializer(sensors, many=True)})
