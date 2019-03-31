@@ -119,6 +119,7 @@ class Sensor(models.Model):
     sensor_coords_lng = models.DecimalField(verbose_name='Долгота', blank=True, null=False, max_digits=10, decimal_places=6)
     region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
                                null=True)
+    name = models.CharField(verbose_name='Имя сенсора', blank=True, null=False, max_length=25)
 
     @property
     def points(self):
@@ -154,6 +155,7 @@ class SensorSerializer(ModelSerializer):
             'sensor_coords_lat',
             'sensor_coords_lng',
             'points',
+            'name'
         )
 
 class GroupSerializer(ModelSerializer):
