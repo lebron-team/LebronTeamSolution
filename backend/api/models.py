@@ -23,6 +23,14 @@ class Area_Points_List(models.Model):
     def humananized_status(self):
         pass
 
+class Alarm_Status(models.Model):
+    class Meta:
+        verbose_name = 'Тревожный статус'
+        verbose_name_plural = 'Тревожный статус'
+
+    name = models.CharField(verbose_name='Имя статуса', max_length=30)
+    status_text = models.CharField(verbose_name='Текст статуса', max_length=60)
+
 class Area_Point(models.Model):
     class Meta:
         verbose_name = 'Координатa'
@@ -52,6 +60,18 @@ class Sensor_Group(models.Model):
                                     null=True)
     region = models.ForeignKey(Region, verbose_name='Область', on_delete=models.DO_NOTHING, blank=True,
                                     null=True)
+    status_fk = models.ForeignKey(Alarm_Status, verbose_name='Тревожный статус', on_delete=models.DO_NOTHING, blank=True,
+                                    null=True)
+
+    @property
+    def points(self):
+        points = Area_Point.objects.filter(points_list=self.coords_list)
+        data_points = Area_Point_Serializer(points, many=True)
+        return data_points.data
+    @property
+    def status(self):
+        status = self.status_fk
+        return StatusSerializer(status).data
 
 class Area_Point_Serializer(ModelSerializer):
     class Meta:
@@ -83,8 +103,11 @@ class Sensor(models.Model):
     @property
     def points(self):
         points = Area_Point.objects.filter(points_list=self.coords_list)
+        print('serializer', points)
         data_points = Area_Point_Serializer(points, many=True)
         return data_points.data
+
+
 
 class Sensor_Data_Set(models.Model):
     class Meta:
@@ -97,14 +120,6 @@ class Sensor_Data_Set(models.Model):
     wind_direction = models.IntegerField(verbose_name='Направление ветра', blank=True, null=False)
     wind_speed = models.IntegerField(verbose_name='Скорость ветра', blank=True, null=False)
     humidity = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
-
-class Alarm_Status(models.Model):
-    class Meta:
-        verbose_name = 'Тревожный статус'
-        verbose_name_plural = 'Тревожный статус'
-
-    name = models.CharField(verbose_name='Имя статуса', max_length=10)
-    status_text = models.CharField(verbose_name='Текст статуса', max_length=30)
 
 class SensorSerializer(ModelSerializer):
     points = serializers.ReadOnlyField()
@@ -119,5 +134,23 @@ class SensorSerializer(ModelSerializer):
             'humidity',
             'sensor_coords_lat',
             'sensor_coords_lng',
-            'points'
+            'points',
+        )
+
+class GroupSerializer(ModelSerializer):
+    points = serializers.ReadOnlyField()
+    status = serializers.ReadOnlyField()
+    class Meta:
+        model = Sensor_Group
+        fields = (
+            'points',
+            'status'
+        )
+
+class StatusSerializer(ModelSerializer):
+    class Meta:
+        model = Alarm_Status
+        fields = (
+            'name',
+            'status_text'
         )

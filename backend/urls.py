@@ -36,7 +36,8 @@ urlpatterns = [
     path('api/admin/', admin.site.urls),
 
 
-        path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
+    path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
+    path('api/rest/group/<int:id>/', rest.Get_Data_Set_By_Region.as_view()),
 ]
 
 
