@@ -8,6 +8,9 @@ import Forester from '@/components/Forester'
 import Emergency from '@/components/Emergency.vue'
 import Update from '@/components/Update.vue'
 import Monitoring from '@/components/Monitoring.vue'
+import SensorsList from '@/components/SensorsList.vue'
+import Territories from '@/components/Territories'
+
 
 Vue.use(Router)
 
@@ -52,6 +55,16 @@ export default new Router({
       path: '/monitoring',
       name: 'monitoring',
       component: Monitoring
+    },
+    {
+      path: '/sensors-list',
+      name: 'sensors-list',
+      component: SensorsList
+    },
+    {
+      path: '/territories',
+      name: 'territories',
+      component: Territories
     }
   ]
 })

@@ -5,11 +5,12 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-2">
+      <div class="col-2 ml-3">
         <side-menu></side-menu>
       </div>
 
-      <div class="col-10 main-window-element box-shadow-line">
+      <div class="col-9 main-window-element box-shadow-line"><br />
+        <h4>Перечень лесничих, ответственных за леные хозяйства</h4><br />
 
         <div class="alert alert-primary">
           Лесничий <strong>Алексеев Иван Васильевич</strong> ––
@@ -41,17 +42,20 @@
 
     </div>
   </div>
+  <f></f>
 </div>
 </template>
 
 <script>
   import SideMenu from "@/components/SideMenu"
   import NavBar from '@/components/NavBar'
+  import F from '@/components/F'
     export default {
         name: "Forester",
         components: {
             'nav-bar': NavBar,
-            'side-menu': SideMenu
+            'side-menu': SideMenu,
+            'f': F
 
         }
     }
