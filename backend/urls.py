@@ -43,7 +43,8 @@ urlpatterns = [
     path('api/sensor/', include(sensor_router.urls)),
 
     path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
-    path('api/rest/group/<int:id>/', rest.Get_Data_Set_By_Region.as_view()),
+    path('api/rest/group/<int:id>/', rest.Get_Data_Set_By_Sensor_Group.as_view()),
+    path('api/rest/region/<int:id>/', rest.Get_Data_Set_By_Region.as_view()),
 ]
 
 
