@@ -32,9 +32,9 @@
                   <circle cx="52%" cy="79%" r="5" fill="red"></circle>
                   <circle cx="19%" cy="90%" r="5" fill="red"></circle>
                   <circle cx="60%" cy="47%" r="5" fill="red"></circle>
+                  <circle cx="49%" cy="49%" r="5" fill="red"></circle>
                 </svg>
               </div>
-
 
             </div>
           </div>
