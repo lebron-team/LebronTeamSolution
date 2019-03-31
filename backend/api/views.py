@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.models import User, Group
-from backend.api.models import Sensor
+from backend.api.models import Sensor, Sensor_Data_Set
 from .models import Message, MessageSerializer
 from rest_framework import serializers, viewsets
 
@@ -59,3 +59,21 @@ class SensorSerializer(serializers.HyperlinkedModelSerializer):
 class SensorViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
+
+
+class SensorDataSetSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Sensor_Data_Set
+        fields = (
+            'date_time',
+            'sensor',
+            'temp',
+            'wind_direction',
+            'wind_speed',
+            'humidity'
+        )
+
+
+class SensorDataSetViewSet(viewsets.ModelViewSet):
+    queryset = Sensor_Data_Set.objects.all()
+    serializer_class = SensorDataSetSerializer

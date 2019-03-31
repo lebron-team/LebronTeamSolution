@@ -20,7 +20,7 @@
       </li>
     </ul>
     <form class="form-inline text-span">
-      <button class="btn btn-secondary my-sm-0" type="submit">Выход</button>
+      <button class="btn btn-primary my-sm-0" type="submit">Выход</button>
     </form>
   </div>
 </nav>

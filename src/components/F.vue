@@ -1,14 +1,16 @@
 <template>
-    <div class="footer-style">
+    <div class="footer-style blue-gradient">
         <div class="container">
-          <p class="footer-block">Place sticky footer content here.</p>
+            <div class="mt-3">
+                <span class="text-light">® 2019</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Footer"
+        name: "F"
     }
 </script>
 
@@ -17,10 +19,9 @@
     bottom: 0;
     width: 100%;
     position: absolute;
-    height: 5rem;
+    height: 3rem;
     background-color: #f5f5f5;
-    margin: 20px 0;
-  }
 
+  }
 
 </style>
