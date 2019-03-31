@@ -42,11 +42,11 @@ urlpatterns = [
     # http://localhost:8000/api/admin/
     path('api/admin/', admin.site.urls),
 
-    path('api/sensors/', include(sensor_router.urls)),
 
-    path('api/sensor-data-set', include(sensors_data_set_routers.urls)),
+    path('api/sensor/', include(sensor_router.urls)),
 
     path('api/rest/sensor/<int:id>/', rest.Get_Sensor.as_view()),
+    path('api/rest/group/<int:id>/', rest.Get_Data_Set_By_Region.as_view()),
 ]
 
 
