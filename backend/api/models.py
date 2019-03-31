@@ -64,7 +64,7 @@ class Region(models.Model):
     @property
     def groups(self):
         sensors = Sensor_Group.objects.filter(region=self.id)
-        return SensorSerializer(sensors, many=True).data
+        return GroupSerializer(sensors, many=True).data
 
 class Sensor_Group(models.Model):
     class Meta:
@@ -168,6 +168,14 @@ class GroupSerializer(ModelSerializer):
             'points',
             'status',
             'sensors',
+            'id'
+        )
+
+class GroupsSerializer(ModelSerializer):
+    class Meta:
+        model = Sensor_Group
+        fields = (
+            'id',
         )
 
 class StatusSerializer(ModelSerializer):
@@ -189,3 +197,17 @@ class RegionSerializer(ModelSerializer):
             'points',
             'name'
         )
+class RegionsSerialize(ModelSerializer):
+    class Meta:
+        model = Region
+        fields = (
+            'id',
+            'name'
+        )
+
+# class DataSetSerializer(ModelSerializer):
+#     class Meta:
+#         model = Sensor_Group
+#         fields = (
+#             'id'
+#         )
