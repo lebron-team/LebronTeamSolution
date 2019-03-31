@@ -3,6 +3,7 @@ from rest_framework import serializers
 from datetime import datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
 from rest_framework.serializers import ModelSerializer
+from backend.api import funcs
 
 class Message(models.Model):
     subject = models.CharField(max_length=200)
@@ -141,6 +142,10 @@ class Sensor_Data_Set(models.Model):
     wind_speed = models.IntegerField(verbose_name='Скорость ветра', blank=True, null=False)
     humidity = models.IntegerField(verbose_name='Влажность', blank=True, null=False)
 
+    @property
+    def unix_date(self):
+        return funcs.time_to_unix(self.date_time)
+
 class SensorSerializer(ModelSerializer):
     points = serializers.ReadOnlyField()
 
@@ -205,9 +210,16 @@ class RegionsSerialize(ModelSerializer):
             'name'
         )
 
-# class DataSetSerializer(ModelSerializer):
-#     class Meta:
-#         model = Sensor_Group
-#         fields = (
-#             'id'
-#         )
+class DataSetsSerializer(ModelSerializer):
+    unix_date = serializers.ReadOnlyField()
+    class Meta:
+        model = Sensor_Data_Set
+        fields = (
+            'id',
+            'unix_date',
+            'temp',
+            'wind_direction',
+            'wind_speed',
+            'humidity',
+            'sensor'
+        )
